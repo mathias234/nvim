@@ -14,5 +14,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.opt.relativenumber = true
+vim.opt.number = true
 
 require("lazy").setup("plugins", {})

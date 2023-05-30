@@ -60,5 +60,11 @@ return {
     },
     init = function() vim.g.barbar_auto_setup = false end,
     opts = {}
+  },
+  {
+    'nmac427/guess-indent.nvim',
+    config = function ()
+      require('guess-indent').setup({})
+    end
   }
 }
