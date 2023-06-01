@@ -15,7 +15,7 @@ return {
     config = function()
       require("nvim-tree").setup({})
       local api = require("nvim-tree.api")
-      vim.keymap.set('n', '<leader>t', api.tree.toggle, {})
+      vim.keymap.set('n', '<leader>t', function() api.tree.toggle({find_file = true}) end, {})
     end
   },
   {
