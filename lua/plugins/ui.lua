@@ -55,8 +55,8 @@ return {
   {
     "romgrk/barbar.nvim",
     dependencies = {
-	'lewis6991/gitsigns.nvim',
-	'nvim-tree/nvim-web-devicons',
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
     init = function() vim.g.barbar_auto_setup = false end,
     opts = {}
@@ -66,5 +66,13 @@ return {
     config = function ()
       require('guess-indent').setup({})
     end
+  },
+  {
+    'echasnovski/mini.indentscope',
+    config = function () 
+      require('mini.indentscope').setup({})
+
+    end
   }
+
 }
