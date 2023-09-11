@@ -12,11 +12,11 @@ return {
       -- refer to the configuration section below
     }
   },
-  {
-    "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000,
-    init = function()
-      vim.o.background = "dark"
-      vim.cmd([[colorscheme catppuccin]])
+  { 
+    "nyoom-engineering/oxocarbon.nvim",
+    init = function() 
+      vim.opt.background = "dark",
+      vim.cmd.colorscheme "oxocarbon"
     end
-  },
+  }, 
 }
