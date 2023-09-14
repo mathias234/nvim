@@ -29,6 +29,16 @@ return {
       })
       lspconfig.lua_ls.setup({})
       lspconfig.solargraph.setup({})
+      lspconfig.tsserver.setup({})
+      lspconfig.tailwindcss.setup({})
+      lspconfig.volar.setup({
+        init_options = {
+            typescript = {
+                tsdk = "/home/mathias/.asdf/installs/nodejs/18.16.0/lib/node_modules/typescript/lib"
+            }
+        }
+      })
+      lspconfig.csharp_ls.setup({})
 
       -- Global mappings.
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
