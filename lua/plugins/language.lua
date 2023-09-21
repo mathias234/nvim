@@ -13,7 +13,8 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      'simrat39/inlay-hints.nvim'
+      'simrat39/inlay-hints.nvim',
+      'Decodetalkers/csharpls-extended-lsp.nvim'
     },
     config = function()
       require("inlay-hints").setup()
@@ -39,6 +40,14 @@ return {
         }
       })
       lspconfig.csharp_ls.setup({})
+
+      lspconfig.csharp_ls.setup({
+        handlers = {
+          ["textDocument/definition"] = require('csharpls_extended').handler,
+        },
+        -- rest of your settings
+      })
+
 
       -- Global mappings.
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
