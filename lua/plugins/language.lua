@@ -14,9 +14,11 @@ return {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       'simrat39/inlay-hints.nvim',
-      'Decodetalkers/csharpls-extended-lsp.nvim'
+      'Decodetalkers/csharpls-extended-lsp.nvim',
+      'lukas-reineke/lsp-format.nvim',
     },
     config = function()
+      require('lsp-format').setup()
       require("inlay-hints").setup()
       local lspconfig = require('lspconfig')
       lspconfig.rust_analyzer.setup({
@@ -46,6 +48,11 @@ return {
           ["textDocument/definition"] = require('csharpls_extended').handler,
         },
         -- rest of your settings
+      })
+
+      -- C++
+      lspconfig.clangd.setup({
+        on_attach = require("lsp-format").on_attach,
       })
 
 
