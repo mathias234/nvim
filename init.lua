@@ -16,4 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.opt.relativenumber = true
 vim.opt.number = true
 
+if vim.g.neovide then
+  vim.opt.guifont = "BerkeleyMono Nerd Font:h12"
+end
+
 require("lazy").setup("plugins", {})
