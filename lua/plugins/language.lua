@@ -31,7 +31,9 @@ return {
         }
       })
       lspconfig.lua_ls.setup({})
-      lspconfig.solargraph.setup({})
+      lspconfig.solargraph.setup({
+        on_attach = require("lsp-format").on_attach,
+      })
       lspconfig.tsserver.setup({})
       lspconfig.tailwindcss.setup({})
       lspconfig.volar.setup({
