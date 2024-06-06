@@ -2,11 +2,11 @@ return {
   {
      "nvim-treesitter/nvim-treesitter",
      config = function()
-	require("nvim-treesitter.configs").setup({
+	     require("nvim-treesitter.configs").setup({
           auto_install = true,
-	  highlight = {enable = true}
+	        highlight = {enable = true}
 
-	})
+	     })
      end
   },
   {
@@ -32,10 +32,10 @@ return {
       })
       lspconfig.lua_ls.setup({})
       lspconfig.solargraph.setup({
-        on_attach = require("lsp-format").on_attach,
       })
+
+      --lspconfig.ruby_lsp.setup({})
       lspconfig.tsserver.setup({})
-      lspconfig.tailwindcss.setup({})
       lspconfig.volar.setup({
         init_options = {
             typescript = {
