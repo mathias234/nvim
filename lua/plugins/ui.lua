@@ -37,21 +37,22 @@ return {
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
 
-        sources = cmp.config.sources({ {name = "copilot", group_index = 2}, { name = "nvim_lsp", group_index = 2 }, { name = "vsnip", group_index = 2 } })
+        -- {name = "copilot", group_index = 2}
+        sources = cmp.config.sources({ { name = "nvim_lsp", group_index = 2 }, { name = "vsnip", group_index = 2 } })
       })
     end,
   },
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = {'zbirenbaum/copilot.lua'},
-    config = function ()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-	panel = { enabled = false }
-      })
-      require("copilot_cmp").setup()
-    end
-  },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   dependencies = {'zbirenbaum/copilot.lua'},
+  --   config = function ()
+  --     require("copilot").setup({
+  --       suggestion = { enabled = false },
+	-- panel = { enabled = false }
+  --     })
+  --     require("copilot_cmp").setup()
+  --   end
+  -- },
   {
     "romgrk/barbar.nvim",
     dependencies = {

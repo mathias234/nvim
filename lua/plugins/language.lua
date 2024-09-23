@@ -31,11 +31,11 @@ return {
         }
       })
       lspconfig.lua_ls.setup({})
-      lspconfig.solargraph.setup({
-      })
+      --lspconfig.solargraph.setup({
+      --})
 
-      --lspconfig.ruby_lsp.setup({})
-      lspconfig.tsserver.setup({})
+      lspconfig.ruby_lsp.setup({})
+      lspconfig.ts_ls.setup({})
       lspconfig.volar.setup({
         init_options = {
             typescript = {
