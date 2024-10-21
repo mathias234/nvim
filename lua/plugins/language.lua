@@ -43,11 +43,11 @@ return {
             }
         }
       })
-      lspconfig.csharp_ls.setup({})
 
       lspconfig.csharp_ls.setup({
         handlers = {
           ["textDocument/definition"] = require('csharpls_extended').handler,
+          ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
         },
         -- rest of your settings
       })

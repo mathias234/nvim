@@ -2,62 +2,51 @@ return {
   "mfussenegger/nvim-dap",
   dependencies = {
     "nvim-telescope/telescope-dap.nvim",
-    "nvim-neotest/nvim-nio";
+    "nvim-neotest/nvim-nio",
     "rcarriga/nvim-dap-ui",
+    "suketa/nvim-dap-ruby"
   },
   config = function()
     local dap = require("dap")
+    require('dap-ruby').setup()
     dap.adapters.lldb = {
       type = "executable",
       command = "/usr/bin/lldb-vscode",
       name = "lldb",
     }
+    dap.adapters.coreclr = {
+      type = 'executable',
+      command = '/usr/bin/netcoredbg',
+      args = { '--interpreter=vscode' }
+    }
 
     dap.configurations.rust = {
       {
-	type = "lldb",
-	request = "launch",
-	name = "Debug",
-	program = function()
-	  return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
-	end,
-	cwd = "${workspaceFolder}",
-	stopOnEntry = false,
-	args = {},
-	runInTerminal = false,
+        type = "lldb",
+        request = "launch",
+        name = "Debug",
+        program = function()
+          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+        args = {},
+        runInTerminal = false,
       },
     }
 
-	dap.adapters.rdbg = function(callback, config)
-	  callback {
-	    type = "server",
-	    host = "127.0.0.1",
-	    port = "${port}",
-	    executable = {
-	      command = "rdbg",
-	      args = { "-n", "--open", "--port", "${port}",
-		"-c", "--", "bundle", "exec", config.command, config.script,
-	      },
-	    },
-	  }
-	end
-
-    dap.configurations.ruby = {
+    dap.configurations.cs = {
       {
-        type = "rdbg",
-        name = "rails",
+        type = "coreclr",
+        name = "launch - netcoredbg",
         request = "launch",
-	cwd = "${workspaceFolder}",
-        command = "${workspaceFolder}/bin/rails",
-        script = "server",
-      },
-      {
-        type = "rdbg",
-        name = "rspec file",
-        request = "launch",
-	cwd = "${workspaceFolder}",
-        command = "rspec",
-        script = "${file}",
+        program = function()
+          return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+        end,
+        cwd = function()
+          local program_path = vim.fn.input('Path to out', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+          return vim.fn.fnamemodify(program_path, ":h") -- Returns the directory of the selected program
+        end,
       },
     }
 
@@ -79,7 +68,8 @@ return {
     vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
     vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
     vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
-    vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+    vim.keymap.set('n', '<Leader>lp',
+      function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
     vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
     vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
     vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end)
