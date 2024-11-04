@@ -115,5 +115,14 @@ return {
     keys = {
       { "<leader><F5>", mode = "n", function() vim.cmd.UndotreeToggle() end, desc = "Undotree" },
     },
+  },
+  {
+    "eldritch-theme/eldritch.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    init = function()
+      vim.cmd.colorscheme "eldritch"
+    end
   }
 }

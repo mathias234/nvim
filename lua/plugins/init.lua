@@ -12,13 +12,13 @@ return {
       -- refer to the configuration section below
     }
   },
-  { 
-    "nyoom-engineering/oxocarbon.nvim",
-    init = function() 
-      vim.opt.background = "dark" -- set this to dark or light
-      vim.cmd.colorscheme "oxocarbon"
-    end
-  }, 
+  -- { 
+  --   "nyoom-engineering/oxocarbon.nvim",
+  --   init = function() 
+  --     vim.opt.background = "dark" -- set this to dark or light
+  --     vim.cmd.colorscheme "oxocarbon"
+  --   end
+  -- }, 
   {
     'https://codeberg.org/esensar/nvim-dev-container',
     dependencies = 'nvim-treesitter/nvim-treesitter',
