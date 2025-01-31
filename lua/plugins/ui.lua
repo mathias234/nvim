@@ -3,10 +3,11 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function() 
+    config = function()
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+      vim.keymap.set('n', '<leader>cg', builtin.colorscheme, {})
     end,
   },
   {
@@ -15,7 +16,7 @@ return {
     config = function()
       require("nvim-tree").setup({})
       local api = require("nvim-tree.api")
-      vim.keymap.set('n', '<leader>t', function() api.tree.toggle({find_file = true}) end, {})
+      vim.keymap.set('n', '<leader>t', function() api.tree.toggle({ find_file = true }) end, {})
     end
   },
   {
@@ -24,11 +25,11 @@ return {
     config = function()
       local cmp = require("cmp")
       cmp.setup({
-	snippet = {
-	  expand = function(args)
-	    vim.fn["vsnip#anonymous"](args.body)
-	  end
-	},
+        snippet = {
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+          end
+        },
         mapping = cmp.mapping.preset.insert({
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -48,7 +49,7 @@ return {
   --   config = function ()
   --     require("copilot").setup({
   --       suggestion = { enabled = false },
-	-- panel = { enabled = false }
+  -- panel = { enabled = false }
   --     })
   --     require("copilot_cmp").setup()
   --   end
@@ -64,65 +65,65 @@ return {
   },
   {
     'nmac427/guess-indent.nvim',
-    config = function ()
+    config = function()
       require('guess-indent').setup({})
     end
   },
   {
     'echasnovski/mini.indentscope',
-    config = function () 
+    config = function()
       require('mini.indentscope').setup({})
-
     end
   },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-    },
-    config = function()
-      require("noice").setup({
-        lsp = {
-          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-          override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-          },
-        },
-        -- you can enable a preset for easier configuration
-        presets = {
-          bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
-          long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs and signature help
-        },
-      })
-    end,
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    }
-  },
+  --  {
+  --    "folke/noice.nvim",
+  --    event = "VeryLazy",
+  --    opts = {
+  --      -- add any options here
+  --    },
+  --    config = function()
+  --      require("noice").setup({
+  --        lsp = {
+  --          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+  --          override = {
+  --            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+  --            ["vim.lsp.util.stylize_markdown"] = true,
+  --            ["cmp.entry.get_documentation"] = true,
+  --          },
+  --        },
+  --        -- you can enable a preset for easier configuration
+  --        presets = {
+  --          bottom_search = true, -- use a classic bottom cmdline for search
+  --          command_palette = true, -- position the cmdline and popupmenu together
+  --          long_message_to_split = true, -- long messages will be sent to a split
+  --          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+  --          lsp_doc_border = false, -- add a border to hover docs and signature help
+  --        },
+  --      })
+  --    end,
+  --    dependencies = {
+  --      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --      "MunifTanjim/nui.nvim",
+  --      -- OPTIONAL:
+  --      --   `nvim-notify` is only needed, if you want to use the notification view.
+  --      --   If not available, we use `mini` as the fallback
+  --      "rcarriga/nvim-notify",
+  --    }
+  --  },
   {
     "mbbill/undotree",
     keys = {
       { "<leader><F5>", mode = "n", function() vim.cmd.UndotreeToggle() end, desc = "Undotree" },
     },
   },
-  {
-    "eldritch-theme/eldritch.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    init = function()
-      vim.cmd.colorscheme "eldritch"
-    end
-  }
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000, init = function() vim.cmd.colorscheme "catppuccin" end }
+  --{
+  --  "eldritch-theme/eldritch.nvim",
+  --  lazy = false,
+  --  priority = 1000,
+  --  opts = {},
+  --  init = function()
+  --    vim.cmd.colorscheme "eldritch"
+  --  end
+  --}
 }

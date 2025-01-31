@@ -1,48 +1,35 @@
 return {
   {
-     "nvim-treesitter/nvim-treesitter",
-     config = function()
-	     require("nvim-treesitter.configs").setup({
-          auto_install = true,
-	        highlight = {enable = true}
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        auto_install = true,
+        highlight = { enable = true }
 
-	     })
-     end
+      })
+    end
   },
   {
-    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      'simrat39/inlay-hints.nvim',
+      "neovim/nvim-lspconfig",
+      "williamboman/mason-lspconfig.nvim",
+      "mfussenegger/nvim-dap",
+      "rcarriga/nvim-dap-ui",
+      "mfussenegger/nvim-lint",
+      "mhartington/formatter.nvim",
       'Decodetalkers/csharpls-extended-lsp.nvim',
-      'lukas-reineke/lsp-format.nvim',
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      require('lsp-format').setup()
-      require("inlay-hints").setup()
+      require("mason").setup()
+      require("mason-lspconfig").setup()
+      require("formatter").setup()
       local lspconfig = require('lspconfig')
-      lspconfig.rust_analyzer.setup({
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              enable = true;
-            },
-          }
-        }
-      })
-      lspconfig.lua_ls.setup({})
-      --lspconfig.solargraph.setup({
-      --})
 
+      lspconfig.lua_ls.setup({})
       lspconfig.ruby_lsp.setup({})
-      lspconfig.ts_ls.setup({})
-      lspconfig.volar.setup({
-        init_options = {
-            typescript = {
-                tsdk = "/home/mathias/.asdf/installs/nodejs/18.16.0/lib/node_modules/typescript/lib"
-            }
-        }
-      })
+
 
       lspconfig.csharp_ls.setup({
         handlers = {
@@ -50,11 +37,6 @@ return {
           ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
         },
         -- rest of your settings
-      })
-
-      -- C++
-      lspconfig.clangd.setup({
-        on_attach = require("lsp-format").on_attach,
       })
 
 
@@ -96,5 +78,56 @@ return {
         end,
       })
     end
-  }
+  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   dependencies = {
+  --     "hrsh7th/cmp-nvim-lsp",
+  --     'simrat39/inlay-hints.nvim',
+  --     --'Decodetalkers/csharpls-extended-lsp.nvim',
+  --     'lukas-reineke/lsp-format.nvim',
+  --   },
+  -- config = function()
+  --   require('lsp-format').setup()
+  --   require("inlay-hints").setup()
+  --   local lspconfig = require('lspconfig')
+  --   lspconfig.rust_analyzer.setup({
+  --     settings = {
+  --       ['rust-analyzer'] = {
+  --         diagnostics = {
+  --           enable = true;
+  --         },
+  --       }
+  --     }
+  --   })
+  --   lspconfig.lua_ls.setup({})
+  --   --lspconfig.solargraph.setup({
+  --   --})
+
+  --   lspconfig.ruby_lsp.setup({})
+  --   lspconfig.ts_ls.setup({})
+  --   lspconfig.volar.setup({
+  --     init_options = {
+  --         typescript = {
+  --             tsdk = "/home/mathias/.asdf/installs/nodejs/18.16.0/lib/node_modules/typescript/lib"
+  --         }
+  --     }
+  --   })
+
+  --   lspconfig.csharp_ls.setup({
+  --     handlers = {
+  --       ["textDocument/definition"] = require('csharpls_extended').handler,
+  --       ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
+  --     },
+  --     -- rest of your settings
+  --   })
+
+  --   -- C++
+  --   lspconfig.clangd.setup({
+  --     on_attach = require("lsp-format").on_attach,
+  --   })
+
+
+
+  --}
 }
