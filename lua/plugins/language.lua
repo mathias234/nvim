@@ -29,6 +29,7 @@ return {
 
       lspconfig.lua_ls.setup({})
       lspconfig.ruby_lsp.setup({})
+      lspconfig.rust_analyzer.setup({})
 
 
       lspconfig.csharp_ls.setup({
